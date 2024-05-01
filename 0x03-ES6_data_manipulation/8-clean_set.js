@@ -1,7 +1,7 @@
 export default function cleanSet(set, startString) {
   const stringArray = [];
 
-  if (startString.length === 0) {
+  if (startString.length === 0 || startString === undefined) {
     return '';
   }
   set.forEach((value) => {

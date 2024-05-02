@@ -10,4 +10,11 @@ interface Teacher {
 interface Directors extends Teacher {
     numberOfReports: number;
 }
-  
+
+interface printTeacherFunction {
+    (firstName: string, lastName: string): string;
+}
+
+const printTeacher: printTeacherFunction = function (firstName, LastName) {
+    return firstName.slice(0, 1).concat('. ', LastName);
+}

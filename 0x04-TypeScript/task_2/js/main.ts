@@ -26,7 +26,7 @@ class Director implements DirectorInterface {
 
 class Teacher implements TeacherInterface {
     workFromHome(): string {
-        return "Cannot work from home"
+        return "Cannot work from home";
     }
 
     getCoffeeBreak(): string {
@@ -51,8 +51,17 @@ function isDirector(employee: Teacher | Director): employee is Director {
 
 function executeWork(employee: Teacher | Director) {
     if (isDirector(employee)) {
-        console.log(employee.workDirectorTasks());
+        employee.workDirectorTasks();
     } else {
-        console.log(employee.workTeacherTasks());
+        employee.workTeacherTasks();
     }
+}
+
+type Subjects = "Math" | "History";
+
+function teachClass(todayClass: Subjects): string {
+    if (todayClass === "Math") {
+        return "Teaching Math";
+    }
+    return "Teaching History";
 }

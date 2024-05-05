@@ -2,7 +2,7 @@
 import { RowElement, RowId } from "./interface";
 import * as CRUD from "./crud";
 
-let row: RowElement = {fisrtName: "Guillaume", lastName: "Salva"};
+const row: RowElement = {fisrtName: "Guillaume", lastName: "Salva"};
 const newRowID: RowId = CRUD.insertRow(row);
 const updateRow: RowElement = {fisrtName: "Guillaume", lastName: "Salva", age: 23};
 

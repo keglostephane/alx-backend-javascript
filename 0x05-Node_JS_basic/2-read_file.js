@@ -26,7 +26,7 @@ function countStudents(filePath) {
     for (const field of Object.getOwnPropertyNames(studentsByField)) {
       const { total } = studentsByField[field];
       const students = studentsByField[field].studentsList.join(', ');
-      console.log(`Number of student in ${field}: ${total}. List: ${students}`);
+      console.log(`Number of students in ${field}: ${total}. List: ${students}`);
     }
   } catch (error) {
     console.log('Cannot load the database');

@@ -6,7 +6,7 @@ const app = http.createServer();
 app
   .on('request', (req, resp) => {
     resp.statusCode = 200;
-    resp.write('Hello Holberton School');
+    resp.write('Hello Holberton School!');
     resp.end();
   })
   .listen(1245);

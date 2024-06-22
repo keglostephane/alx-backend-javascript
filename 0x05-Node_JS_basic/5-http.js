@@ -46,10 +46,10 @@ app
       resp.write('Hello Holberton School!');
       resp.end();
     } else if (url === '/students') {
+      resp.statusCode = 200;
+      resp.write('This is the list of our students\n');
       try {
         const studentsData = await countStudents(process.argv[2]);
-        resp.statusCode = 200;
-        resp.write('This is the list of our students\n');
         resp.write(`Number of students: ${studentsData.numberStudents}`);
 
         for (const [key, value] of Object.entries(studentsData.studentsByField)) {

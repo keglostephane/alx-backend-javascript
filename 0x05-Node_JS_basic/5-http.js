@@ -64,7 +64,7 @@ app
       }
     } else {
       resp.statusCode = 404;
-      resp.write('Not Found');
+      resp.write('Not found');
       resp.end();
     }
   })

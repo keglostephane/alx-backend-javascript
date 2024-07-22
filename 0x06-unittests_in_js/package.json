@@ -1,0 +1,17 @@
+{
+  "name": "0x06-unittests_in_js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha *.test.js",
+    "lint": "standard",
+    "lint-fix": "standard --fix"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^10.7.0",
+    "standard": "^17.1.0"
+  }
+}

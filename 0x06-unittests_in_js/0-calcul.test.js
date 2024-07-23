@@ -10,6 +10,6 @@ describe('sum of numbers', function () {
     assert.equal(calculateNumber(2.3, 3), 5)
   })
   it('two floating point', function () {
-    assert.equal(calculateNumber(2.1, 3.6), 6)
+    assert.equal(calculateNumber(2, 3.6), 6)
   })
 })

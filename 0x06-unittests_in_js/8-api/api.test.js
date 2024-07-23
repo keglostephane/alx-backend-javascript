@@ -9,10 +9,10 @@ describe('api index page', function () {
 
     it('should returns 200 status code', async function() {
         const { statusCode } = await requestGet(url)
-        expect(statusCode).to.be.equal(200)
+        expect(statusCode).to.equal(200)
     })
     it('should returns correct message', async function() {
         const { body } = await requestGet(url)
-        expect(body).to.be.equal('Welcome to the payment system')
+        expect(body).to.equal('Welcome to the payment system')
     })
 })

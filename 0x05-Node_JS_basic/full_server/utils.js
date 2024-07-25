@@ -1,28 +1,28 @@
+/* eslint-disable consistent-return */
 const fs = require('fs');
 
-const readDatabase = (Path) => new Promise((resolve, reject) => {
-  fs.readFile(Path, 'utf-8', (err, data) => {
-    if (err) {
-      reject(err);
-    } else if (data) {
-      const students = {};
-      const lines = data.split('\n');
-
-      for (let i = 1; i < lines.length; i += 1) {
-        if (lines[i].trim()) { // Ensure the line is not empty
-          const fields = lines[i].split(',');
-          const course = fields[3];
-          const firstName = fields[0];
-          if (Object.prototype.hasOwnProperty.call(students, course)) {
-            students[course].push(firstName);
-          } else {
-            students[course] = [firstName];
-          }
-        }
+function readDatabase(filePath) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+      if (err) {
+        return reject(err);
       }
-      resolve(students);
-    }
-  });
-});
 
-module.exports = readDatabase;
+      const lines = data.trim().split('\n');
+      const result = {};
+
+      lines.slice(1).forEach((line) => {
+        const [firstname, , , field] = line.split(',');
+        if (result[field]) {
+          result[field].push(firstname);
+        } else {
+          result[field] = [firstname];
+        }
+      });
+
+      resolve(result);
+    });
+  });
+}
+
+module.exports = { readDatabase };

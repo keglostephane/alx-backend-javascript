@@ -1,33 +1,44 @@
-const readDatabase = require('../utils');
+/* eslint-disable consistent-return */
+const { readDatabase } = require('../utils');
 
 class StudentsController {
-  static getAllStudents(req, res) {
-    readDatabase(process.argv[2].toString()).then((data) => {
+  static async getAllStudents(req, res) {
+    try {
+      const data = await readDatabase('./database.csv');
       let result = 'This is the list of our students\n';
-      const fields = Object.keys(data).sort();
 
-      for (let i = 0; i < fields.length; i += 1) {
-        result += `Number of students in ${fields[i]}: ${data[fields[i]].length}. List: ${data[fields[i]].join(', ')}\n`;
-      }
+      Object.keys(data).sort((a, b) => a
+        .toLowerCase()
+        .localeCompare(b.toLowerCase()))
+        .forEach((field) => {
+          const students = data[field];
+          result += `Number of students in ${field}: ${students.length}. List: ${students.join(', ')}\n`;
+        });
 
       res.status(200).send(result.trim());
-    }).catch(() => {
+    } catch (err) {
       res.status(500).send('Cannot load the database');
-    });
+    }
   }
 
-  static getAllStudentsByMajor(req, res) {
+  static async getAllStudentsByMajor(req, res) {
     const { major } = req.params;
-    readDatabase(process.argv[2].toString()).then((data) => {
-      if (!(major in data)) {
-        res.status(500).send('Major parameter must be CS or SWE');
-      } else {
-        const result = `List: ${data[major].join(', ')}`;
-        res.status(200).send(result);
+
+    if (major !== 'CS' && major !== 'SWE') {
+      return res.status(500).send('Major parameter must be CS or SWE');
+    }
+
+    try {
+      const data = await readDatabase('./database.csv');
+
+      if (!data[major]) {
+        return res.status(500).send('Cannot load the database');
       }
-    }).catch(() => {
+
+      res.status(200).send(`List: ${data[major].join(', ')}`);
+    } catch (err) {
       res.status(500).send('Cannot load the database');
-    });
+    }
   }
 }
 
